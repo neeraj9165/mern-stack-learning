@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>learning dom</title>
+</head>
+<script>
+      function debouncePopulateDiv(){
+         const timeout = setTimeout(function(){
+            populateDiv()
+         },100)
+          clearTimeout(timeout)
+
+      }
+
+
+
+    function populateDiv(){
+     
+     const a = document.getElementById("first").value;
+     const b = document.getElementById("second").value; 
+
+     fetch ("https://sum-server.100xdevs.com/sum?a="+a+" &b=" +b)
+     .then(function(response){
+        response.text()
+        .then(function(ans){
+            document.getElementById("finalSum").innerHTML=ans
+        })
+     });
+  
+}
+</script>
+<body>
+    
+    
+    <input  oninput="debouncePopulateDiv()"  id="first" type="text" placeholder="First number"></input><br></br>
+    <input  oninput="debouncePopulateDiv()"  id="second" type="text" placeholder="Second number"></input><br></br>
+    <button onclick="populateDiv()">    calculate sum</button>
+    <div id="finalSum"> </div>
+
+</body>
+</html>
+            
+ 
